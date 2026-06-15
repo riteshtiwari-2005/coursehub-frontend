@@ -6,7 +6,6 @@ import { Link } from "react-router-dom"
 
 import { fetchInstructorCourses } from "../../../services/operations/courseDetailsAPI"
 import { getInstructorData } from "../../../services/operations/profileAPI"
-import IconBtn from "../../Common/IconBtn"
 import InstructorChart from "./InstructorDashboard/InstructorChart"
 
 export default function Instructor() {
@@ -60,6 +59,14 @@ export default function Instructor() {
             Monitor revenue, learner engagement, and course performance from a
             cleaner, more focused dashboard.
           </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <Link to="/dashboard/add-course" className="btn-primary inline-flex min-h-[48px] items-center justify-center px-5 text-base font-bold">
+              Create course
+            </Link>
+            <Link to="/dashboard/create-category" className="btn-secondary inline-flex min-h-[48px] items-center justify-center px-5 text-base font-bold">
+              Create category
+            </Link>
+          </div>
         </div>
         <div className="dashboard-pill bg-blue-50 text-blue-600 border-blue-100 font-bold px-6 py-3">
           <HiMiniArrowTrendingUp className="text-xl" />
@@ -92,8 +99,11 @@ export default function Instructor() {
                     full analytics suite.
                   </p>
                 </div>
-                <Link to="/dashboard/add-course">
-                  <IconBtn text="Create your first course" />
+                <Link to="/dashboard/add-course" className="btn-primary inline-flex min-h-[48px] items-center justify-center px-5 text-base font-bold">
+                  Create your first course
+                </Link>
+                <Link to="/dashboard/create-category" className="btn-secondary inline-flex min-h-[48px] items-center justify-center px-5 text-base font-bold">
+                  Create category
                 </Link>
               </div>
             )}
@@ -175,8 +185,11 @@ export default function Instructor() {
             Start your journey by creating your first course. This dashboard will automatically track 
             your performance, revenue, and student growth.
           </p>
-          <Link to="/dashboard/add-course" className="mt-10">
-            <IconBtn text="Create your first course" />
+          <Link to="/dashboard/add-course" className="mt-10 btn-primary inline-flex min-h-[48px] items-center justify-center px-5 text-base font-bold">
+            Create your first course
+          </Link>
+          <Link to="/dashboard/create-category" className="mt-4 btn-secondary inline-flex min-h-[48px] items-center justify-center px-5 text-base font-bold">
+            Create category
           </Link>
         </div>
       )}

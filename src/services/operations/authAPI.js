@@ -1,19 +1,20 @@
 import { toast } from "react-hot-toast"
 
-import { setLoading, setToken } from "../../slices/authSlice"
+import { clearAuthData, setLoading, setLoginData, setToken } from "../../slices/authSlice"
 import { resetCart } from "../../slices/cartSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { endpoints } from "../apis"
 
-const {
+const { 
   SENDOTP_API,
+  VERIFYOTP_API,
   SIGNUP_API,
   LOGIN_API,
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
 } = endpoints
-
+ 
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
@@ -100,18 +101,47 @@ export function login(email, password, navigate) {
         throw new Error(response.data.message)
       }
 
-      toast.success("Login Successful")
-      dispatch(setToken(response.data.token))
-      const userImage = response.data?.user?.image
-        ? response.data.user.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
-      dispatch(setUser({ ...response.data.user, image: userImage }))
-      
-      localStorage.setItem("token", JSON.stringify(response.data.token))
-      navigate("/dashboard/my-profile")
+      dispatch(setLoginData({ email, password }))
+      toast.success("Login successful. Please verify OTP to continue.")
+      navigate("/verify-otp")
     } catch (error) {
       console.log("LOGIN API ERROR............", error)
       toast.error("Login Failed")
+    }
+    dispatch(setLoading(false))
+    toast.dismiss(toastId)
+  }
+}
+
+export function verifyLoginOtp(email, password, otp, navigate) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Verifying OTP...")
+    dispatch(setLoading(true))
+    try {
+      const response = await apiConnector("POST", VERIFYOTP_API, {
+        email,
+        password,
+        otp,
+      })
+
+      if (!response.data.success) {
+        throw new Error(response.data.message)
+      }
+
+      const userImage = response.data?.user?.image
+        ? response.data.user.image
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
+
+      dispatch(setToken(response.data.token))
+      dispatch(setUser({ ...response.data.user, image: userImage }))
+      localStorage.setItem("token", JSON.stringify(response.data.token))
+      dispatch(clearAuthData())
+
+      toast.success("OTP verified successfully")
+      navigate("/dashboard/my-profile")
+    } catch (error) {
+      console.log("VERIFY OTP API ERROR............", error)
+      toast.error(error.response?.data?.message || error.message || "Could not verify OTP")
     }
     dispatch(setLoading(false))
     toast.dismiss(toastId)

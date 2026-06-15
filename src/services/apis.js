@@ -1,9 +1,10 @@
-const BASE_URL ="https://coursehub-backend-code-1.onrender.com/api/v1"  //deployed backend base url
-
+const BASE_URL ="https://coursehub-backend-owqc.onrender.com/api/v1"  //deployed backend base url
+///api/v1/auth
 
 // AUTH ENDPOINTS
 export const endpoints = {
   SENDOTP_API: BASE_URL + "/auth/sendotp",
+  VERIFYOTP_API: BASE_URL + "/auth/verifyotp",
   SIGNUP_API: BASE_URL + "/auth/signup",
   LOGIN_API: BASE_URL + "/auth/login",
   RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
@@ -28,6 +29,7 @@ export const courseEndpoints = {
   COURSE_DETAILS_API: BASE_URL + "/course/getCourseDetails",
   EDIT_COURSE_API: BASE_URL + "/course/editCourse",
   COURSE_CATEGORIES_API: BASE_URL + "/course/showAllCategories",
+  CREATE_CATEGORY_API: BASE_URL + "/course/createCategory",
   CREATE_COURSE_API: BASE_URL + "/course/createCourse",
   CREATE_SECTION_API: BASE_URL + "/course/addSection",
   CREATE_SUBSECTION_API: BASE_URL + "/course/addSubSection",

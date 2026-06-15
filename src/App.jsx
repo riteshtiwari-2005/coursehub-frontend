@@ -8,6 +8,7 @@ import OpenRoute from "./components/core/Auth/OpenRoute"
 import PrivateRoute from "./components/core/Auth/PrivateRoute"
 import AddCourse from "./components/core/Dashboard/AddCourse"
 import Cart from "./components/core/Dashboard/Cart"
+import CreateCategory from "./components/core/Dashboard/CreateCategory"
 import EditCourse from "./components/core/Dashboard/EditCourse"
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses"
 import Instructor from "./components/core/Dashboard/Instructor"
@@ -27,6 +28,7 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import UpdatePassword from "./pages/UpdatePassword"
 import VerifyEmail from "./pages/VerifyEmail"
+import VerifyOtp from "./pages/VerifyOtp"
 import ViewCourse from "./pages/ViewCourse"
 import { getUserDetails } from "./services/operations/profileAPI"
 import { ACCOUNT_TYPE } from "./utils/constants"
@@ -102,6 +104,7 @@ function App() {
               </OpenRoute>
             }
           />
+          <Route path="verify-otp" element={<VerifyOtp />} />
 
           <Route
             element={
@@ -118,6 +121,7 @@ function App() {
                 <Route path="dashboard/instructor" element={<Instructor />} />
                 <Route path="dashboard/my-courses" element={<MyCourses />} />
                 <Route path="dashboard/add-course" element={<AddCourse />} />
+                <Route path="dashboard/create-category" element={<CreateCategory />} />
                 <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
               </>
             )}

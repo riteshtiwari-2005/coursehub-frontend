@@ -145,7 +145,7 @@ const Footer = () => {
             ))}
           </div>
 
-          <p className="font-medium text-slate-500">Developed by Zaid Siddiqui</p>
+          <p className="font-medium text-slate-500">Developed by Ritesh Tiwari</p>
         </div>
       </div>
     </footer>
